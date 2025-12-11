@@ -1,0 +1,7 @@
+[package]
+name = "oonum"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+oonum-macros.git = "https://github.com/Quelfth/oonum-macros"
