@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 oonum-macros.git = "https://github.com/Quelfth/oonum-macros"
+
+[features]
+function-style = ["oonum-macros/function-style"]

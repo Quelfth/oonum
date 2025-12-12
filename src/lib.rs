@@ -1,5 +1,8 @@
 pub use oonum_macros::{dispatch, oonum};
 
+#[cfg(feature = "function-style")]
+pub use oonum_macros::{dispatch_, oonum_};
+
 pub trait Sub<S: ?Sized> {
     fn borrow_super(supe: &S) -> Option<&Self>;
     fn borrow_super_mut(supe: &mut S) -> Option<&mut Self>;
@@ -10,6 +13,27 @@ pub trait Sub<S: ?Sized> {
 
     fn can_borrow_super(supe: &S) -> bool {
         Self::borrow_super(supe).is_some()
+    }
+}
+
+impl<T> Sub<T> for T {
+    fn borrow_super(supe: &T) -> Option<&Self> {
+        Some(supe)
+    }
+
+    fn borrow_super_mut(supe: &mut T) -> Option<&mut Self> {
+        Some(supe)
+    }
+
+    fn from_super(supe: T) -> Option<Self>
+    where
+        Self: Sized,
+    {
+        Some(supe)
+    }
+
+    fn into_super(self) -> T {
+        self
     }
 }
 
@@ -39,6 +63,17 @@ pub trait Super {
 }
 
 impl<T> Super for T {}
+
+pub trait IntoThisSuper {
+    fn into_this_super<T>(self) -> T
+    where
+        Self: Sized + Sub<T>,
+    {
+        self.into_super()
+    }
+}
+
+impl<T> IntoThisSuper for T {}
 
 pub trait Discriminant<O> {
     const DISCRIMINANT: u16;

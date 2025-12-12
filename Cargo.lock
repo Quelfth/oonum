@@ -12,7 +12,7 @@ dependencies = [
 [[package]]
 name = "oonum-macros"
 version = "0.1.0"
-source = "git+https://github.com/Quelfth/oonum-macros#79fb8342a6bd8c67122c633352415ef71a08b1d1"
+source = "git+https://github.com/Quelfth/oonum-macros#ed46a56251240eb17c26a0ae7be8f30558469297"
 dependencies = [
  "proc-macro2",
  "quote",
